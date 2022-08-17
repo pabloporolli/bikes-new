@@ -4,6 +4,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
     font-size: 5rem;
     color: black;
     text-decoration: none;
-    margin-left: 1rem;
+    margin-left: 0rem;
 }
 
 .contenedorUl{
@@ -81,4 +82,20 @@ body {
 
 .contenedorRedes a:hover {
   text-decoration: underline;
+}
+
+.saludo {
+  font-size: 1.5rem;
+  padding: 2rem;
+  text-align: left;
+  text-emphasis: none;
+  text-decoration: none;
+  font-family: 'DynaPuff', cursive;;
+}
+
+#cart {
+  display: flex;
+  padding: 1rem;
+  background-color: black;
+  color: white;
 }
