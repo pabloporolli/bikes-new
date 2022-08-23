@@ -48,7 +48,7 @@ body {
   font-size: 1.5rem;
   text-align: left;
   padding: 2rem;
-  height: 60vh;
+  height: 20vh;
 }
 
 .impaciente {
@@ -98,4 +98,56 @@ body {
   padding: 1rem;
   background-color: black;
   color: white;
+}
+
+.fotoMadone {
+  width: 60%;
+}
+
+.contenedorCard {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  border-color: black;
+  border-style: solid;
+  padding: 2rem;
+}
+
+.botonAgregar {
+  padding: 1rem;
+  background-color: black;
+  border-style: none;
+  color: white;
+  }
+
+.botonAgregar:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.contenedorSumar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 50%;
+}
+
+.botonMasMenos {
+  padding: 0.7rem;
+  background-color: black;
+  border-style: none;
+  color: white;
+  font-size: large;
+}
+
+.modelo {
+  font-size: large;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
 }
