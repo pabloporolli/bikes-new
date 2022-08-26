@@ -104,6 +104,12 @@ body {
   width: 60%;
 }
 
+.contenedorGeneral {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .contenedorCard {
   display: flex;
   flex-direction: column;
@@ -149,5 +155,5 @@ body {
   font-size: large;
   text-transform: uppercase;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
 }
