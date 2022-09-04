@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import ItemListContainer from './components/ItemListContainer';
 import './index.css';
-import ItemCount from './components/ItemCount';
+import ItemDetailContainer from './components/ItemDetailContainer';
 
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
     <>
       <Header />
       <ItemListContainer saludo='Hola, bienvenido a Bike. Acá podrás encontrar las mejores bicicletas para vos.'/>
-      <ItemCount stock={stock} inicial={inicial} onAdd={onAdd}/>
+      <ItemDetailContainer stock={stock} inicial={inicial} onAdd={onAdd}/>
       <Footer/>
     </>
   )

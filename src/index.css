@@ -122,6 +122,13 @@ body {
   padding: 2rem;
 }
 
+.contenedorSumarAgregar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-evenly;
+}
+
 .botonAgregar {
   padding: 1rem;
   background-color: black;
@@ -151,9 +158,18 @@ body {
   font-size: large;
 }
 
+.unidades {
+  margin-inline: 1rem;
+}
+
 .modelo {
   font-size: large;
   text-transform: uppercase;
   font-weight: bold;
   padding: 0.5rem;
+}
+
+.cargando {
+  margin: 3rem;
+  color: red;
 }
