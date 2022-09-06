@@ -102,6 +102,7 @@ body {
 
 .fotoMadone {
   width: 60%;
+  margin: 0.5rem;
 }
 
 .contenedorGeneral {
@@ -117,9 +118,46 @@ body {
   align-items: center;
   justify-content: center;
   width: 500px;
+  height: 50vh;
   border-color: black;
   border-style: solid;
   padding: 2rem;
+}
+
+.contenedorDetalle {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  border-color: black;
+  border-style: solid;
+  padding: 2rem;
+}
+
+.imagenTextos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fotoMadoneDetail {
+  width: 80%;
+}
+
+.textosDetalle {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.modeloDetalle {
+  font-size: large;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .contenedorSumarAgregar {
@@ -134,6 +172,7 @@ body {
   background-color: black;
   border-style: none;
   color: white;
+  margin: 1rem;
   }
 
 .botonAgregar:disabled {

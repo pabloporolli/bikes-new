@@ -1,12 +1,33 @@
 import React from 'react'
-
+import { Route, Routes } from 'react-router-dom';
 import '../../index.css'
+import ItemDetailContainer from '../ItemDetailContainer';
+import ItemListContainer from '../ItemListContainer';
+import Cart from '../Cart';
+
+
 const Main = () => {
   return (
-    <div className='proximamente'>
-        <p>Próximamente, nuestra selección completa de bicicletas.</p>
-        <p className='impaciente'>Por ahora, tenemos sólo una.</p>
-        </div>
+    <main >
+      <Routes>
+        <Route
+          path = "/"
+          element = {<ItemListContainer saludo="Descubrí nuestra selección de bicis."/>}
+        />
+        <Route
+          path = "/category/:categoryName"
+          element = {<ItemListContainer/>}
+        />
+        <Route
+          path = "/detail/:idProd"
+          element = {<ItemDetailContainer/>}
+        />
+        <Route
+          path = "/cart"
+          element = {<Cart/>}
+        />
+      </Routes>
+    </main>
   )
 }
 

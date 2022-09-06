@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import ItemListContainer from './components/ItemListContainer';
 import './index.css';
 import ItemDetailContainer from './components/ItemDetailContainer';
+import { BrowserRouter } from 'react-router-dom';
+import Main from './components/Main/Main';
 
 
 const App = () => {
@@ -18,10 +20,11 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <ItemListContainer saludo='Hola, bienvenido a Bike. Acá podrás encontrar las mejores bicicletas para vos.'/>
-      <ItemDetailContainer stock={stock} inicial={inicial} onAdd={onAdd}/>
-      <Footer/>
+      <BrowserRouter>
+        <Header />
+        <Main />
+        <Footer/>
+      </BrowserRouter>
     </>
   )
 }

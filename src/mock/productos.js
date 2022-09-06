@@ -25,5 +25,32 @@ export let productos = [
         stock: 5,
         category: "Triatlon",
         img: '../img/canyon-speedmax.png'
+    },
+    {
+        id: 4,
+        title: "Trek",
+        description: "Supercaliber 9.9",
+        price: 11500,
+        stock: 6,
+        category: "Montaña",
+        img: '../img/supercaliber.png'
+    },
+    {
+        id: 5,
+        title: "Trek",
+        description: "X-Caliber 8",
+        price: 1900,
+        stock: 2,
+        category: "Montaña",
+        img: '../img/xcaliber.png'
+    },
+    {
+        id: 6,
+        title: "Specialized",
+        description: "Roubaix Expert",
+        price: 9000,
+        stock: 4,
+        category: "Ruta",
+        img: '../img/roubaix.png'
     }
 ];

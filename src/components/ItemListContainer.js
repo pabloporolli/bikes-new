@@ -2,17 +2,20 @@ import React, {useState, useEffect} from 'react'
 import '../index.css'
 import {productos} from '../mock/productos'
 import ItemList from './ItemList';
-import Main from './Main/Main';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = (prop) => {
-
     const {saludo} = prop;
     const [items, setItems] = useState([]);
-    
+    const {categoryName} = useParams();
+
     useEffect ( () => {
       const getProductos = new Promise ( (res, rej) => {
+        const prodFiltrados = productos.filter(
+          (prod) => prod.category === categoryName
+        );
         setTimeout ( () => {
-          res (productos);
+          res (categoryName ? prodFiltrados : productos);
         }, 2000);
       });
       getProductos
@@ -24,12 +27,11 @@ const ItemListContainer = (prop) => {
       .finally (() => {
         console.log ("Finally");
       })
-    }, []);
+    }, [categoryName]);
     
     return (
       <div>
         <h2 className='saludo'>{saludo}</h2>
-        <Main />
         <ItemList items={items} />
       </div>
   );

@@ -16,7 +16,6 @@ const ItemList = (prop) => {
         }
 
     </div>
-  
     )
 }
 
