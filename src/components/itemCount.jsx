@@ -9,7 +9,7 @@ let restar = () => {
 }
 
 let sumar = () => {
-  count < stock ? setCount (count + 1) : alert("Para comprar más unidades, comunicarse con el comercio.");
+  count < stock ? setCount (count + 1) : alert("Para comprar más unidades, por favor, comunicarse con el comercio.");
 };
 
 let deshabilitado;
