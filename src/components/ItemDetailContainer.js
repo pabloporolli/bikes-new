@@ -10,10 +10,6 @@ const ItemDetailContainer = (props) => {
     const {idProd} = useParams();
     const idProdNumerico = Number(idProd);
 
-    const onAdd = (cantidad) => {
-        console.log(`Agregaste al carrito ${cantidad} unidades.`);
-      };
-
     useEffect ( () => {
         const getProducto = new Promise ( (res, rej) => {
             const prodUnico = productos.find(
@@ -38,7 +34,7 @@ console.log ("Producto en ItemDetailContainer: ", producto);
     
     return (
     <div>
-        <ItemDetail producto = {producto} stock={stock} inicial={inicial} onAdd={onAdd}/>
+        <ItemDetail producto = {producto} stock={stock} inicial={inicial}/>
     </div>
   )
 
