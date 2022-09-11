@@ -16,21 +16,20 @@ const ItemDetailContainer = (props) => {
                 (prod) => prod.id === idProdNumerico);
             setTimeout ( () => {
                 res (idProd ? prodUnico : productos);
-            }, 2000);
+            }, 500);
         });
     getProducto
     .then ((data) => {
         setProducto(data);
-        console.log (data);
     })
     .catch ((error) => {
     })
     .finally (() => {
-        console.log ("Finally");
+//        console.log ("Finally");
     })
     }, [idProdNumerico, idProd]);
 
-console.log ("Producto en ItemDetailContainer: ", producto);
+// console.log ("Producto en ItemDetailContainer: ", producto);
     
     return (
     <div>

@@ -212,3 +212,11 @@ body {
   margin: 3rem;
   color: red;
 }
+
+.contenedorCarrito {
+  height: 60vh;
+}
+
+.carrito {
+  margin: 3rem;
+}

@@ -16,7 +16,7 @@ const ItemListContainer = (prop) => {
         );
         setTimeout ( () => {
           res (categoryName ? prodFiltrados : productos);
-        }, 2000);
+        }, 500);
       });
       getProductos
       .then ((data) => {
@@ -25,7 +25,7 @@ const ItemListContainer = (prop) => {
       .catch ((error) => {
       })
       .finally (() => {
-        console.log ("Finally");
+//        console.log ("Finally");
       })
     }, [categoryName]);
     

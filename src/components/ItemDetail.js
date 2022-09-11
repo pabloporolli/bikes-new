@@ -1,18 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom';
+import { cartContext } from '../context/CartContext';
 import ItemCount from './ItemCount'
 
 const ItemDetail = ({producto, stock, inicial}) => {
-console.log("Producto en ItemDetail: ", producto);
 
+const {addItem, removeItem, cart, clear} = useContext (cartContext);
 const [cantidad, setCantidad] = useState (0);
 
-const onAdd = (cantidad) => {
-    setCantidad(cantidad);
-    console.log(`Agregaste al carrito ${cantidad} unidades.`);
-  };
+const onAdd = (cant) => {
+    setCantidad(cant);
+    addItem(producto, cant);
+    console.log(`Agregaste al carrito ${cant} ${producto.title}`);
+};
 
-  return (
+const onRemove = (producto) => {
+    removeItem(producto);
+    console.log("Producto borrado: ", cart);
+    setCantidad(0);
+}
+
+const onClear = () => {
+    clear();
+}
+
+console.log("Cart: ", cart);
+
+return (
     <>
         {producto.id ? (
         <div className='contenedorDetalle'>
@@ -31,9 +45,13 @@ const onAdd = (cantidad) => {
 
             {cantidad !== 0
                 ? (
+                    <>
                     <Link to = '/cart'>
                         <button className='botonAgregar'>Ir al carrito</button>
                     </Link>
+                    <button onClick={()=>onRemove(producto)} className='botonAgregar'>Eliminar Producto</button>
+                    <button onClick={()=>onClear()} className='botonAgregar'>Vaciar carrito</button>
+                    </>
                 ) : (
                     <div>
                     <ItemCount stock={producto.stock} inicial={inicial} onAdd={onAdd}/>
