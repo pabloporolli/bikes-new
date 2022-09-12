@@ -25,9 +25,12 @@ const CartProvider = (props) => {
       }
     }
 
+    // Armar una función que sea para agregar la cantidad a un producto que ya tengo.
+    // Map devuelve un array y permite transformar (para sumar la cantidad).
+
     const removeItem = (item) => {
       if(isInCart(item)) {
-        const newCart = cart;
+        const newCart = [...cart];     // No se puede hacer una copia con newCart = cart porque lo que se hace es crear un alias, apuntar a un mismo lugar en memoria.
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
         newCart.splice(indice, 1);
         setCart(newCart);
