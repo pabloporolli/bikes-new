@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import '../index.css'
-import {productos} from '../mock/productos'
 import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
+import {collection, getDocs, query, where} from 'firebase/firestore';
+import {db} from '../firebaseConfig';
 
 const ItemListContainer = (prop) => {
     const {saludo} = prop;
@@ -10,6 +11,28 @@ const ItemListContainer = (prop) => {
     const {categoryName} = useParams();
 
     useEffect ( () => {
+      const itemCollection = collection(db, 'productos');
+
+      categoryName ? getDocs(query(itemCollection, where("category", "==", categoryName))) : getDocs(itemCollection)
+      .then ( (res) => {
+        const products = res.docs.map((prod) => {
+          return {
+            id: prod.id,
+            ...prod.data()
+          }
+        })
+        setItems(products);
+      })
+      .catch((error) => {
+        console.log("Error");
+      })
+      .finally(() => {
+        // setIsLoading (false);
+      })
+    },[categoryName]);
+
+    
+ /*    useEffect ( () => {
       const getProductos = new Promise ( (res, rej) => {
         const prodFiltrados = productos.filter(
           (prod) => prod.category === categoryName
@@ -27,8 +50,10 @@ const ItemListContainer = (prop) => {
       .finally (() => {
 //        console.log ("Finally");
       })
-    }, [categoryName]);
-    
+    }, [categoryName]); */
+
+
+
     return (
       <div>
         <h2 className='saludo'>{saludo}</h2>

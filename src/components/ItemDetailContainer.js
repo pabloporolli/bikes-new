@@ -1,16 +1,29 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
-import {productos} from '../mock/productos'
 import ItemDetail from './ItemDetail';
+import { db } from '../firebaseConfig';
+import {getDoc, doc, collection} from 'firebase/firestore';
 
 const ItemDetailContainer = (props) => {
 
     const {stock, inicial} = props;
     const [producto, setProducto] = useState ({});
     const {idProd} = useParams();
-    const idProdNumerico = Number(idProd);
 
     useEffect ( () => {
+        const itemCollection = collection(db, 'productos');
+        const ref = doc(itemCollection, idProd);
+        getDoc(ref)
+        .then((res) => {
+            setProducto(({
+                id: res.id,
+                ...res.data(),
+            }))
+        })
+    }, [idProd])
+
+
+/*     useEffect ( () => {
         const getProducto = new Promise ( (res, rej) => {
             const prodUnico = productos.find(
                 (prod) => prod.id === idProdNumerico);
@@ -27,9 +40,8 @@ const ItemDetailContainer = (props) => {
     .finally (() => {
 //        console.log ("Finally");
     })
-    }, [idProdNumerico, idProd]);
+    }, [idProdNumerico, idProd]); */
 
-// console.log ("Producto en ItemDetailContainer: ", producto);
     
     return (
     <div>
