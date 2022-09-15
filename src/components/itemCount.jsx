@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-const ItemCount = ({stock, inicial, onAdd}) => {
-
-const [count, setCount] = useState(0);
+const ItemCount = ({producto, stock, inicial = 0, onAdd}) => {
+console.log("Inicial: ", inicial);
+const [count, setCount] = useState(inicial);
 
 let restar = () => {
   count > 0 && setCount (count - 1);
@@ -22,7 +22,7 @@ count === 0 ? deshabilitado = true : deshabilitado = false;
             <p className='unidades'>{count} Unidades</p>
             <button onClick={sumar} className='botonMasMenos'>+</button>
         </div>
-        <button disabled={deshabilitado} onClick={()=>onAdd(count)} className='botonAgregar'>Agregar al carrito</button>
+        <button disabled={deshabilitado} onClick={()=>onAdd(count, producto.id)} className='botonAgregar'>Agregar al carrito</button>
       </div>
   )
 }

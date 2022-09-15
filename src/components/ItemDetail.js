@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { cartContext } from '../context/CartContext';
 import ItemCount from './ItemCount'
 
-const ItemDetail = ({producto, stock, inicial}) => {
+const ItemDetail = ({producto, stock}) => {
 
-const {addItem, removeItem, cart, clear} = useContext (cartContext);
+const {addItem, removeItem, cart, clear, getProdQty} = useContext (cartContext);
 const [cantidad, setCantidad] = useState (0);
 
-const onAdd = (cant) => {
+const onAdd = (cant, id) => {
     setCantidad(cant);
     addItem(producto, cant);
-    console.log(`Agregaste al carrito ${cant} ${producto.title}`);
+    console.log(`En tu carrito hay ${cant} ${producto.title}`);
 };
 
 const onRemove = (producto) => {
@@ -19,6 +19,8 @@ const onRemove = (producto) => {
     console.log("Producto borrado: ", cart);
     setCantidad(0);
 }
+
+const cantidadProductos = getProdQty(producto.id);
 
 const onClear = () => {
     clear();
@@ -46,15 +48,20 @@ return (
             {cantidad !== 0
                 ? (
                     <>
-                    <Link to = '/cart'>
-                        <button className='botonAgregar'>Ir al carrito</button>
-                    </Link>
-                    <button onClick={()=>onRemove(producto)} className='botonAgregar'>Eliminar Producto</button>
-                    <button onClick={()=>onClear()} className='botonAgregar'>Vaciar carrito</button>
+                    <div>
+                    <ItemCount producto={producto} stock={producto.stock} inicial={cantidadProductos} onAdd={onAdd}/>
+                    </div>
+                    <div className='botonesItemDetail'>
+                        <Link to = '/cart'>
+                            <button className='botonAgregar'>Terminar mi compra</button>
+                        </Link>
+                        <button onClick={()=>onRemove(producto)} className='botonAgregar'>Eliminar Producto</button>
+                        <button onClick={()=>onClear()} className='botonAgregar'>Vaciar carrito</button>
+                    </div>
                     </>
                 ) : (
                     <div>
-                    <ItemCount stock={producto.stock} inicial={inicial} onAdd={onAdd}/>
+                    <ItemCount producto={producto} stock={producto.stock} inicial={cantidadProductos} onAdd={onAdd}/>
                     </div>
                 )}
 

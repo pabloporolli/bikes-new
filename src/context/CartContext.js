@@ -17,7 +17,7 @@ const CartProvider = (props) => {
       if (isInCart(item)) {
         const newCart = cart;
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
-        newCart[indice].cantidad += cantidad;
+        newCart[indice].cantidad = cantidad;
         setCart(newCart);
         }
       else {
@@ -42,9 +42,32 @@ const CartProvider = (props) => {
       setCart([]);
     }
 
+    const getProdQty = (id) => {
+      const product = cart.find((prod) => prod.id === id)
+      return product?.cantidad
+    }
+
+    const calcularTotal = () => {
+      let acumulador = 0;
+      cart.forEach((element) => {
+        acumulador += element.price * element.cantidad;
+      });
+      return acumulador;
+    };
+
+    const calcularTotalProductos = () => {
+      let acumulador = 0;
+      cart.forEach((element) => {
+        acumulador += element.cantidad;
+        console.log('Acumulador es igual a ', acumulador )
+      });
+      return acumulador;
+    };
+
+
   return (
     <>
-        <cartContext.Provider value = {{cart, addItem, removeItem, clear}}>
+        <cartContext.Provider value = {{cart, addItem, removeItem, clear, getProdQty, calcularTotal, calcularTotalProductos}}>
             {props.children}
         </cartContext.Provider>
     </>
