@@ -12,8 +12,11 @@ const ItemListContainer = (prop) => {
 
     useEffect ( () => {
       const itemCollection = collection(db, 'productos');
-
-      categoryName ? getDocs(query(itemCollection, where("category", "==", categoryName))) : getDocs(itemCollection)
+      
+//      categoryName ? getDocs(query(itemCollection, where("category", "==", categoryName))) : getDocs(itemCollection)
+      
+      if (categoryName){
+      getDocs(query(itemCollection, where("category", "==", categoryName)))
       .then ( (res) => {
         const products = res.docs.map((prod) => {
           return {
@@ -29,8 +32,26 @@ const ItemListContainer = (prop) => {
       .finally(() => {
         // setIsLoading (false);
       })
+    }
+    else {
+      getDocs(query(itemCollection))
+      .then ( (res) => {
+        const products = res.docs.map((prod) => {
+          return {
+            id: prod.id,
+            ...prod.data()
+          }
+        })
+        setItems(products);
+      })
+      .catch((error) => {
+        console.log("Error");
+      })
+      .finally(() => {
+        // setIsLoading (false);
+      })
+    }
     },[categoryName]);
-
     
  /*    useEffect ( () => {
       const getProductos = new Promise ( (res, rej) => {
