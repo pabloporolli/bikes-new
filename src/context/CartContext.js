@@ -15,7 +15,7 @@ const CartProvider = (props) => {
     
     const addItem = (item, cantidad) => {
       if (isInCart(item)) {
-        const newCart = cart;
+        const newCart = [...cart];
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
         newCart[indice].cantidad = cantidad;
         setCart(newCart);
