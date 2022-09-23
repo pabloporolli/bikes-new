@@ -55,8 +55,6 @@ return (
                         <Link to = '/cart'>
                             <button className='botonAgregar'>Terminar mi compra</button>
                         </Link>
-                        <button onClick={()=>onRemove(producto)} className='botonAgregar'>Eliminar Producto</button>
-                        <button onClick={()=>onClear()} className='botonAgregar'>Vaciar carrito</button>
                     </div>
                     </>
                 ) : (
