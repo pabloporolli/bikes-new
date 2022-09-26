@@ -2,12 +2,21 @@ import React from 'react'
 import { useContext } from 'react'
 import { cartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
+import Form from './Form'
+import { useState } from 'react'
 
 const Cart = () => {
   
   const {cart, removeItem, clear, calcularTotal, calcularTotalProductos} = useContext(cartContext);
 
 const cantidadProductos = calcularTotalProductos ();
+const precioTotal = calcularTotal ();
+
+const [idCompra, setIdCompra] = useState ('');
+const handleIdCompra = (id) => {
+  setIdCompra(id);
+};
+console.log(idCompra);
 
   return (
     <>
@@ -32,12 +41,20 @@ const cantidadProductos = calcularTotalProductos ();
           </div>
         )
       })}
+      <h2 className='total'>Cantidad de productos: {calcularTotalProductos()}</h2>
+      <h2 className='total'>Total: $ {precioTotal}</h2>
+      <button onClick={()=>clear()} className='botonVaciar'>Vaciar carrito</button>
       <Link to="/">
         <button className='botonVaciar'>Seguir comprando</button>
       </Link>
-      <button onClick={()=>clear()} className='botonVaciar'>Vaciar carrito</button>
-      <h2 className='total'>Cantidad de productos: {calcularTotalProductos()}</h2>
-      <h2 className='total'>Total: $ {calcularTotal()}</h2>
+      <section>
+        <Form precio={precioTotal} carrito={cart} handleIdCompra={handleIdCompra} />
+      </section>
+    </div>
+  ) : idCompra ? (
+    <div className='contenedorCarritoVacio'>
+      <h3>Muchas gracias por tu compra</h3>
+      <p>El ID de tu compra es {idCompra}</p>
     </div>
   ) : (
     <div className='contenedorCarritoVacio'>

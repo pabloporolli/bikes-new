@@ -56,7 +56,6 @@ const CartProvider = (props) => {
       let acumulador = 0;
       cart.forEach((element) => {
         acumulador += element.cantidad;
-        console.log('Acumulador es igual a ', acumulador )
       });
       return acumulador;
     };
