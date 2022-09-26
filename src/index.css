@@ -282,3 +282,14 @@ body {
   margin-bottom: 1rem;
   padding: 0.5rem;
 }
+
+.contenedorResumenCompra {
+  margin: 3rem;
+  height: 50vh;
+  line-height: 3rem;
+}
+
+.detalleCompra {
+  margin-top: 2rem;
+  text-transform: uppercase;
+}

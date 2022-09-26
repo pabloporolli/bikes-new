@@ -21,27 +21,6 @@ const ItemDetailContainer = (props) => {
             }))
         })
     }, [idProd])
-
-
-/*     useEffect ( () => {
-        const getProducto = new Promise ( (res, rej) => {
-            const prodUnico = productos.find(
-                (prod) => prod.id === idProdNumerico);
-            setTimeout ( () => {
-                res (idProd ? prodUnico : productos);
-            }, 500);
-        });
-    getProducto
-    .then ((data) => {
-        setProducto(data);
-    })
-    .catch ((error) => {
-    })
-    .finally (() => {
-//        console.log ("Finally");
-    })
-    }, [idProdNumerico, idProd]); */
-
     
     return (
     <div>

@@ -4,7 +4,7 @@ import {db} from '../firebaseConfig';
 import { useContext } from 'react';
 import { cartContext } from '../context/CartContext';
 
-const Form = ({precio, carrito, handleIdCompra}) => {
+const Form = ({precio, carrito, handleIdCompra, handleOrdenCompra}) => {
 
     const {clear} = useContext(cartContext);
 
@@ -35,6 +35,7 @@ const Form = ({precio, carrito, handleIdCompra}) => {
         addDoc(ordersCollection, order)
         .then( (res) => {
             handleIdCompra(res.id);
+            handleOrdenCompra(order);
             clear();
         })
         .catch((error) => {

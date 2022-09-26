@@ -26,8 +26,6 @@ const onClear = () => {
     clear();
 }
 
-console.log("Cart: ", cart);
-
 return (
     <>
         {producto.id ? (

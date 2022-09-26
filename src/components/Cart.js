@@ -4,43 +4,33 @@ import { cartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import Form from './Form'
 import { useState } from 'react'
+import ListadoCompra from './ListadoCompra'
 
 const Cart = () => {
   
   const {cart, removeItem, clear, calcularTotal, calcularTotalProductos} = useContext(cartContext);
 
-const cantidadProductos = calcularTotalProductos ();
-const precioTotal = calcularTotal ();
+  const cantidadProductos = calcularTotalProductos ();
+  const precioTotal = calcularTotal ();
 
-const [idCompra, setIdCompra] = useState ('');
-const handleIdCompra = (id) => {
-  setIdCompra(id);
-};
-console.log(idCompra);
+  const [idCompra, setIdCompra] = useState ('');
+  const handleIdCompra = (id) => {
+    setIdCompra(id);
+  };
+  console.log(idCompra);
+
+  const [orden, setOrden] = useState({});
+  const handleOrdenCompra = (res) => {
+    setOrden(res);
+  }
+
+  let esCompra = false;
 
   return (
     <>
     {cantidadProductos !== 0 ? (
     <div className='contenedorCarrito'>
-      {cart.map((item) => {
-        return (
-          <div key={item.id} className='carrito'>
-            <table className='rowTabla'>
-              <tbody>
-                <tr>
-                  <td>Marca: {item.title}</td>
-                  <td>Modelo: {item.description}</td>
-                  <td>Cantidad: {item.cantidad}</td>
-                  <td>Precio: {item.price}</td>
-                  <td>
-                    <button onClick={()=>removeItem(item)} className='botonEliminar'>Eliminar producto</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        )
-      })}
+      <ListadoCompra cart={cart} removeItem={removeItem} esCompra={esCompra}/>
       <h2 className='total'>Cantidad de productos: {calcularTotalProductos()}</h2>
       <h2 className='total'>Total: $ {precioTotal}</h2>
       <button onClick={()=>clear()} className='botonVaciar'>Vaciar carrito</button>
@@ -48,13 +38,21 @@ console.log(idCompra);
         <button className='botonVaciar'>Seguir comprando</button>
       </Link>
       <section>
-        <Form precio={precioTotal} carrito={cart} handleIdCompra={handleIdCompra} />
+        <Form precio={precioTotal} carrito={cart} handleIdCompra={handleIdCompra} handleOrdenCompra={handleOrdenCompra}/>
       </section>
     </div>
   ) : idCompra ? (
-    <div className='contenedorCarritoVacio'>
-      <h3>Muchas gracias por tu compra</h3>
-      <p>El ID de tu compra es {idCompra}</p>
+    <div className='contenedorResumenCompra'>
+      { esCompra = true}
+      <div className=''>
+        <h3>Muchas gracias por tu compra</h3>
+        <p>El ID de tu compra es {idCompra}</p>
+        <div className='detalleCompra'>
+          <h5>Detalle de tu compra</h5>
+          <ListadoCompra cart={orden.item} removeItem={removeItem} esCompra={esCompra} />
+          <p>Monto total: {orden.total}</p>
+        </div>
+      </div>
     </div>
   ) : (
     <div className='contenedorCarritoVacio'>
