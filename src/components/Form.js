@@ -3,10 +3,13 @@ import { collection, serverTimestamp, addDoc } from 'firebase/firestore';
 import {db} from '../firebaseConfig';
 import { useContext } from 'react';
 import { cartContext } from '../context/CartContext';
+import { compraContext } from '../context/CompraContext';
+import ListadoCompra from './ListadoCompra';
 
-const Form = ({precio, carrito, handleIdCompra, handleOrdenCompra}) => {
+const Form = () => {
 
-    const {clear} = useContext(cartContext);
+    const {clear, cart, removeItem} = useContext(cartContext);
+    const {cantidadProductos, precioTotal, idCompra, orden, handleIdCompra, handleOrdenCompra} = useContext(compraContext);
 
     const [nombre, setNombre] = useState ('');
     const [apellido, setApellido] = useState ('');
@@ -16,7 +19,6 @@ const Form = ({precio, carrito, handleIdCompra, handleOrdenCompra}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(nombre, apellido, direccion, telefono, correo);
         const order = {
             buyer: {
                 nombre: nombre,
@@ -25,8 +27,8 @@ const Form = ({precio, carrito, handleIdCompra, handleOrdenCompra}) => {
                 telefono: telefono,
                 correo: correo,
             },
-            item: carrito,
-            total: precio,
+            item: cart,
+            total: precioTotal,
             date: serverTimestamp(),
         };
         
@@ -66,15 +68,31 @@ const Form = ({precio, carrito, handleIdCompra, handleOrdenCompra}) => {
         setCorreo(e.target.value);
     }
  
+    let esCompra = false;
+
   return (
+    idCompra ? (
+        <div className='contenedorResumenCompra'>
+          { esCompra = true}
+          <div className=''>
+            <h3>Muchas gracias por tu compra</h3>
+            <p>El ID de tu compra es {idCompra}</p>
+            <div className='detalleCompra'>
+              <h5>Detalle de tu compra</h5>
+              <ListadoCompra cart={orden.item} removeItem={removeItem} esCompra={esCompra} />
+              <p>Monto total: {orden.total}</p>
+            </div>
+          </div>
+        </div>
+      ) : 
     <div>
-        <h3 className='formulario'>Complete los datos para realizar la compra</h3>
+        <h3 className='tituloForm'>Complete los datos para realizar la compra</h3>
         <form action="" className='formulario' onSubmit={handleSubmit}>
-            <input className='inputFormulario' type="text" name='nombre' value={nombre} placeholder = 'nombre' onChange={handleNombre}/>
-            <input className='inputFormulario' type="text" name='apellido' value={apellido} placeholder = 'apellido' onChange={handleApellido}/>
-            <input className='inputFormulario' type="text" name='direccion' value={direccion} placeholder = 'dirección' onChange={handleDireccion}/>
-            <input className='inputFormulario' type="number" name='telefono' value={telefono} placeholder = 'teléfono' onChange={handleTelefono}/>
-            <input className='inputFormulario' type="email" name='correo' value={correo} placeholder = 'email' onChange={handleCorreo}/>
+            <input className='inputFormulario' type="text" required name='nombre' value={nombre} placeholder = 'nombre' onChange={handleNombre}/>
+            <input className='inputFormulario' type="text" required name='apellido' value={apellido} placeholder = 'apellido' onChange={handleApellido}/>
+            <input className='inputFormulario' type="text" required name='direccion' value={direccion} placeholder = 'dirección' onChange={handleDireccion}/>
+            <input className='inputFormulario' type="number" required name='telefono' value={telefono} placeholder = 'teléfono' onChange={handleTelefono}/>
+            <input className='inputFormulario' type="email" required name='correo' value={correo} placeholder = 'email' onChange={handleCorreo}/>
             <button className='botonAgregar'>Realizar Pedido</button>
         </form>
     </div>

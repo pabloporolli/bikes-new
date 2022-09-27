@@ -5,6 +5,7 @@ export const cartContext = createContext ();
 const CartProvider = (props) => {
 
     const [cart, setCart] = useState([]);
+   // const [idProducto, setIdProducto] = useState('');
 
     const isInCart = (prod) => {
       if (cart.find(i => i.id === prod.id)) {
@@ -19,11 +20,13 @@ const CartProvider = (props) => {
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
         newCart[indice].cantidad = cantidad;
         setCart(newCart);
+  //      setIdProducto(item.id);
         }
       else {
       setCart([...cart, {...item, cantidad}]);
       }
     }
+   // console.log("idProducto", idProducto);
 
     const removeItem = (item) => {
       if(isInCart(item)) {
@@ -31,7 +34,6 @@ const CartProvider = (props) => {
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
         newCart.splice(indice, 1);
         setCart(newCart);
-        console.log("Eliminaste un producto. Tu carrito ahora: ", cart);
       }
     }
 

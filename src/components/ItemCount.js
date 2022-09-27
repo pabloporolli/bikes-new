@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
 const ItemCount = ({producto, stock, inicial = 0, onAdd}) => {
-//console.log("Inicial: ", inicial);
 const [count, setCount] = useState(inicial);
 
 

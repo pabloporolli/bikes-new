@@ -293,3 +293,7 @@ body {
   margin-top: 2rem;
   text-transform: uppercase;
 }
+
+.tituloForm {
+  margin: 3rem;
+}

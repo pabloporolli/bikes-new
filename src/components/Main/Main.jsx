@@ -4,6 +4,7 @@ import '../../index.css'
 import ItemDetailContainer from '../ItemDetailContainer';
 import ItemListContainer from '../ItemListContainer';
 import Cart from '../Cart';
+import Form from '../Form';
 
 
 const Main = () => {
@@ -25,6 +26,10 @@ const Main = () => {
         <Route
           path = "/cart"
           element = {<Cart/>}
+        />
+        <Route
+          path = '/compra'
+          element = {<Form/>}
         />
       </Routes>
     </main>

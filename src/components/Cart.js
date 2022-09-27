@@ -5,24 +5,12 @@ import { Link } from 'react-router-dom'
 import Form from './Form'
 import { useState } from 'react'
 import ListadoCompra from './ListadoCompra'
+import { compraContext } from '../context/CompraContext'
 
 const Cart = () => {
   
   const {cart, removeItem, clear, calcularTotal, calcularTotalProductos} = useContext(cartContext);
-
-  const cantidadProductos = calcularTotalProductos ();
-  const precioTotal = calcularTotal ();
-
-  const [idCompra, setIdCompra] = useState ('');
-  const handleIdCompra = (id) => {
-    setIdCompra(id);
-  };
-  console.log(idCompra);
-
-  const [orden, setOrden] = useState({});
-  const handleOrdenCompra = (res) => {
-    setOrden(res);
-  }
+  const {cantidadProductos, precioTotal, idCompra, orden} = useContext(compraContext);
 
   let esCompra = false;
 
@@ -37,22 +25,9 @@ const Cart = () => {
       <Link to="/">
         <button className='botonVaciar'>Seguir comprando</button>
       </Link>
-      <section>
-        <Form precio={precioTotal} carrito={cart} handleIdCompra={handleIdCompra} handleOrdenCompra={handleOrdenCompra}/>
-      </section>
-    </div>
-  ) : idCompra ? (
-    <div className='contenedorResumenCompra'>
-      { esCompra = true}
-      <div className=''>
-        <h3>Muchas gracias por tu compra</h3>
-        <p>El ID de tu compra es {idCompra}</p>
-        <div className='detalleCompra'>
-          <h5>Detalle de tu compra</h5>
-          <ListadoCompra cart={orden.item} removeItem={removeItem} esCompra={esCompra} />
-          <p>Monto total: {orden.total}</p>
-        </div>
-      </div>
+      <Link to={"/compra"}>
+        <button className='botonVaciar'>Comprar</button>
+      </Link>
     </div>
   ) : (
     <div className='contenedorCarritoVacio'>
