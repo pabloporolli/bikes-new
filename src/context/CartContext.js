@@ -28,7 +28,7 @@ const CartProvider = (props) => {
 
     const removeItem = (item) => {
       if(isInCart(item)) {
-        const newCart = [...cart];     // No se puede hacer una copia con newCart = cart porque lo que se hace es crear un alias, apuntar a un mismo lugar en memoria.
+        const newCart = [...cart];
         let indice = cart.indexOf(cart.find(j => j.id === item.id));
         newCart.splice(indice, 1);
         setCart(newCart);

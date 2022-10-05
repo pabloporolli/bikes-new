@@ -24,7 +24,6 @@ const CompraProvider = (props) => {
     }
 
    const updateStock = (id, cantidad) => {
-        console.log(id);
         const productDoc = doc(db, "productos", id);
         getDoc(productDoc)
         .then((prod) =>

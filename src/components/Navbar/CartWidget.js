@@ -7,10 +7,6 @@ const CartWidget = () => {
   const {calcularTotalProductos} = useContext(cartContext)
   let totalProductos = calcularTotalProductos ();
   
-  
-  // cart.reduce((accu, item) => accu + item.cantidad, 0)
-  
-  
   return (
     <div className='contenedorCart'>
         <span className="material-symbols-outlined" id='cart'>

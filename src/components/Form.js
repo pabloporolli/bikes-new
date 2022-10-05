@@ -44,11 +44,9 @@ const Form = () => {
             console.log("error")
         })
         .finally(() => {
-            // console.log("Finally")
         });
 
         for (let objeto of order.item){
-            console.log(objeto.id);
             updateStock(objeto.id, objeto.cantidad);
         }
     };
@@ -74,15 +72,6 @@ const Form = () => {
     }
  
     let esCompra = false;
-
-/*     const [carritoVacio, setCarritoVacio] = useState();
-    if (calcularUnidadesCompradas() === 0) {
-        setCarritoVacio(true);
-    }
-    else {
-        setCarritoVacio(false);
-    }
-    console.log("Unidades Compradas: ", carritoVacio); */
 
   return (
     idCompra ? (

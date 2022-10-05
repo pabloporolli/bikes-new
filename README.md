@@ -34,4 +34,7 @@ Para crear un pull request deberá crear una rama nueva con su nombre y seguir l
 
 
 ### Detalle
-![Detalle](public/detalle.png) 
+![Detalle](public/detalle.png)
+
+### Deploy
+Ver el deploy del proyecto en este [link](https://bikes-new.vercel.app)

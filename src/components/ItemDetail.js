@@ -5,26 +5,15 @@ import ItemCount from './ItemCount'
 
 const ItemDetail = ({producto, stock}) => {
 
-const {addItem, removeItem, cart, clear, getProdQty} = useContext (cartContext);
+const {addItem, getProdQty} = useContext (cartContext);
 const [cantidad, setCantidad] = useState (0);
 
 const onAdd = (cant, id) => {
     setCantidad(cant);
     addItem(producto, cant);
-    console.log(`En tu carrito hay ${cant} ${producto.title}`);
 };
 
-const onRemove = (producto) => {
-    removeItem(producto);
-    console.log("Producto borrado: ", cart);
-    setCantidad(0);
-}
-
 const cantidadProductos = getProdQty(producto.id);
-
-const onClear = () => {
-    clear();
-}
 
 return (
     <>
