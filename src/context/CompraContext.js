@@ -1,4 +1,4 @@
-import { updateDoc, doc } from 'firebase/firestore';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 import React, { createContext, useState } from 'react'
 import { useContext } from 'react';
 import { cartContext } from './CartContext';
@@ -8,7 +8,7 @@ export const compraContext = createContext ();
 
 const CompraProvider = (props) => {
 
-    const {cart, removeItem, clear, calcularTotal, calcularTotalProductos, getProdQt} = useContext(cartContext);
+    const {calcularTotal, calcularTotalProductos} = useContext(cartContext);
 
     const cantidadProductos = calcularTotalProductos ();
     const precioTotal = calcularTotal ();
@@ -17,25 +17,27 @@ const CompraProvider = (props) => {
     const handleIdCompra = (id) => {
       setIdCompra(id);
     };
-    console.log(idCompra);
-  
+    
     const [orden, setOrden] = useState({});
-    const handleOrdenCompra = (res) => {
-      setOrden(res);
+    const handleOrdenCompra = (or) => {
+      setOrden(or);
     }
-    console.log("Orden", orden);
-  
-/*     const updateStock = () => {
-        const productDoc = doc(db, "productos", idProducto);
-        updateDoc(productDoc, {stock: 100});
-    }
-    console.log("idProducto: ", idProducto); */
 
-    // const nuevoStock =  getProdQt(idProducto);
+   const updateStock = (id, cantidad) => {
+        console.log(id);
+        const productDoc = doc(db, "productos", id);
+        getDoc(productDoc)
+        .then((prod) =>
+        {
+            const cantidadOriginal = prod.data().stock;
+            const cantidadNueva = cantidadOriginal - cantidad;
+            updateDoc(productDoc, {stock: cantidadNueva});
+        })
+    }  
 
   return (
     <>
-        <compraContext.Provider value = {{cantidadProductos, precioTotal, idCompra, orden, handleIdCompra, handleOrdenCompra}}>
+        <compraContext.Provider value = {{cantidadProductos, precioTotal, idCompra, orden, handleIdCompra, handleOrdenCompra, updateStock}}>
             {props.children}
         </compraContext.Provider>
     </>

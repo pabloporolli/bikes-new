@@ -6,8 +6,6 @@ const ListadoCompra = (props) => {
     const removeItem = props.removeItem;
     const esCompra = props.esCompra;
 
-    console.log("Cart en ListadoCompra", carro);
-
   return (
     <>
     {carro.map((item) => {

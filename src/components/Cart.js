@@ -2,15 +2,13 @@ import React from 'react'
 import { useContext } from 'react'
 import { cartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
-import Form from './Form'
-import { useState } from 'react'
 import ListadoCompra from './ListadoCompra'
 import { compraContext } from '../context/CompraContext'
 
 const Cart = () => {
   
-  const {cart, removeItem, clear, calcularTotal, calcularTotalProductos} = useContext(cartContext);
-  const {cantidadProductos, precioTotal, idCompra, orden} = useContext(compraContext);
+  const {cart, removeItem, clear, calcularTotalProductos} = useContext(cartContext);
+  const {cantidadProductos, precioTotal} = useContext(compraContext);
 
   let esCompra = false;
 

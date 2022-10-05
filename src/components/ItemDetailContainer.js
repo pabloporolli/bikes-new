@@ -9,6 +9,7 @@ const ItemDetailContainer = (props) => {
     const {stock, inicial} = props;
     const [producto, setProducto] = useState ({});
     const {idProd} = useParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect ( () => {
         const itemCollection = collection(db, 'productos');
@@ -19,12 +20,19 @@ const ItemDetailContainer = (props) => {
                 id: res.id,
                 ...res.data(),
             }))
+            setIsLoading(false);
         })
     }, [idProd])
     
     return (
     <div>
-        <ItemDetail producto = {producto} stock={stock} inicial={inicial}/>
+        {
+            isLoading ? <div className='loader'></div> : (
+                <>
+                    <ItemDetail producto = {producto} stock={stock} inicial={inicial}/>
+                </>
+            )
+        }
     </div>
   )
 

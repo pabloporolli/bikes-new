@@ -9,6 +9,7 @@ import CartProvider from './context/CartContext';
 import CompraProvider from './context/CompraContext';
 
 const App = () => {
+  console.log(process.env);
   return (
     <>
       <CartProvider>

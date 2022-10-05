@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { collection, serverTimestamp, addDoc } from 'firebase/firestore';
+import { collection, serverTimestamp, addDoc} from 'firebase/firestore';
 import {db} from '../firebaseConfig';
 import { useContext } from 'react';
 import { cartContext } from '../context/CartContext';
@@ -9,7 +9,7 @@ import ListadoCompra from './ListadoCompra';
 const Form = () => {
 
     const {clear, cart, removeItem} = useContext(cartContext);
-    const {cantidadProductos, precioTotal, idCompra, orden, handleIdCompra, handleOrdenCompra} = useContext(compraContext);
+    const {cantidadProductos, precioTotal, idCompra, orden, handleIdCompra, handleOrdenCompra, updateStock} = useContext(compraContext);
 
     const [nombre, setNombre] = useState ('');
     const [apellido, setApellido] = useState ('');
@@ -27,7 +27,7 @@ const Form = () => {
                 telefono: telefono,
                 correo: correo,
             },
-            item: cart,
+            item: [...cart],
             total: precioTotal,
             date: serverTimestamp(),
         };
@@ -46,6 +46,11 @@ const Form = () => {
         .finally(() => {
             // console.log("Finally")
         });
+
+        for (let objeto of order.item){
+            console.log(objeto.id);
+            updateStock(objeto.id, objeto.cantidad);
+        }
     };
 
     const handleNombre = (e) => {
@@ -70,6 +75,15 @@ const Form = () => {
  
     let esCompra = false;
 
+/*     const [carritoVacio, setCarritoVacio] = useState();
+    if (calcularUnidadesCompradas() === 0) {
+        setCarritoVacio(true);
+    }
+    else {
+        setCarritoVacio(false);
+    }
+    console.log("Unidades Compradas: ", carritoVacio); */
+
   return (
     idCompra ? (
         <div className='contenedorResumenCompra'>
@@ -86,15 +100,20 @@ const Form = () => {
         </div>
       ) : 
     <div>
-        <h3 className='tituloForm'>Complete los datos para realizar la compra</h3>
-        <form action="" className='formulario' onSubmit={handleSubmit}>
-            <input className='inputFormulario' type="text" required name='nombre' value={nombre} placeholder = 'nombre' onChange={handleNombre}/>
-            <input className='inputFormulario' type="text" required name='apellido' value={apellido} placeholder = 'apellido' onChange={handleApellido}/>
-            <input className='inputFormulario' type="text" required name='direccion' value={direccion} placeholder = 'dirección' onChange={handleDireccion}/>
-            <input className='inputFormulario' type="number" required name='telefono' value={telefono} placeholder = 'teléfono' onChange={handleTelefono}/>
-            <input className='inputFormulario' type="email" required name='correo' value={correo} placeholder = 'email' onChange={handleCorreo}/>
-            <button className='botonAgregar'>Realizar Pedido</button>
-        </form>
+        {cantidadProductos !== 0 ? (
+        <>
+            <h3 className='tituloForm'>Complete los datos para realizar la compra</h3>
+            <form action="" className='formulario' onSubmit={handleSubmit}>
+                <input className='inputFormulario' type="text" required name='nombre' value={nombre} placeholder = 'nombre' onChange={handleNombre}/>
+                <input className='inputFormulario' type="text" required name='apellido' value={apellido} placeholder = 'apellido' onChange={handleApellido}/>
+                <input className='inputFormulario' type="text" required name='direccion' value={direccion} placeholder = 'dirección' onChange={handleDireccion}/>
+                <input className='inputFormulario' type="number" required name='telefono' value={telefono} placeholder = 'teléfono' onChange={handleTelefono}/>
+                <input className='inputFormulario' type="email" required name='correo' value={correo} placeholder = 'email' onChange={handleCorreo}/>
+                <button className='botonAgregar'>Realizar Pedido</button>
+            </form>
+        </>
+        ) : <div className='noCompra'>Aún no has hecho una compra.</div>
+        }
     </div>
   )
 }

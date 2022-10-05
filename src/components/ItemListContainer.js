@@ -9,11 +9,10 @@ const ItemListContainer = (prop) => {
     const {saludo} = prop;
     const [items, setItems] = useState([]);
     const {categoryName} = useParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect ( () => {
       const itemCollection = collection(db, 'productos');
-      
-//      categoryName ? getDocs(query(itemCollection, where("category", "==", categoryName))) : getDocs(itemCollection)
       
       if (categoryName){
       getDocs(query(itemCollection, where("category", "==", categoryName)))
@@ -30,7 +29,7 @@ const ItemListContainer = (prop) => {
         console.log("Error");
       })
       .finally(() => {
-        // setIsLoading (false);
+         setIsLoading (false);
       })
     }
     else {
@@ -48,37 +47,21 @@ const ItemListContainer = (prop) => {
         console.log("Error");
       })
       .finally(() => {
-        // setIsLoading (false);
+         setIsLoading (false);
       })
     }
     },[categoryName]);
     
- /*    useEffect ( () => {
-      const getProductos = new Promise ( (res, rej) => {
-        const prodFiltrados = productos.filter(
-          (prod) => prod.category === categoryName
-        );
-        setTimeout ( () => {
-          res (categoryName ? prodFiltrados : productos);
-        }, 500);
-      });
-      getProductos
-      .then ((data) => {
-        setItems (data);
-      })
-      .catch ((error) => {
-      })
-      .finally (() => {
-//        console.log ("Finally");
-      })
-    }, [categoryName]); */
-
-
-
     return (
       <div>
+        { isLoading ? <div className='loader'></div> :
+        (
+          <>
         <h2 className='saludo'>{saludo}</h2>
         <ItemList items={items} />
+          </>
+        )
+        }
       </div>
   );
 };

@@ -5,7 +5,6 @@ export const cartContext = createContext ();
 const CartProvider = (props) => {
 
     const [cart, setCart] = useState([]);
-   // const [idProducto, setIdProducto] = useState('');
 
     const isInCart = (prod) => {
       if (cart.find(i => i.id === prod.id)) {
@@ -26,7 +25,6 @@ const CartProvider = (props) => {
       setCart([...cart, {...item, cantidad}]);
       }
     }
-   // console.log("idProducto", idProducto);
 
     const removeItem = (item) => {
       if(isInCart(item)) {
