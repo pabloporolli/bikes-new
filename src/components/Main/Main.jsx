@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
 import '../../index.css'
-import ItemDetailContainer from '../ItemDetailContainer';
-import ItemListContainer from '../ItemListContainer';
-import Cart from '../Cart';
-import Form from '../Form';
+import ItemDetailContainer from '../Productos/ItemDetailContainer';
+import ItemListContainer from '../Productos/ItemListContainer';
+import Cart from '../Compra/Cart';
+import Form from '../Compra/Form';
 
 
 const Main = () => {

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import '../index.css'
+import '../../index.css'
 import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
 import {collection, getDocs, query, where} from 'firebase/firestore';
-import {db} from '../firebaseConfig';
+import {db} from '../../firebaseConfig';
 
 const ItemListContainer = (prop) => {
     const {saludo} = prop;

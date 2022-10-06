@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { collection, serverTimestamp, addDoc} from 'firebase/firestore';
-import {db} from '../firebaseConfig';
+import {db} from '../../firebaseConfig';
 import { useContext } from 'react';
-import { cartContext } from '../context/CartContext';
-import { compraContext } from '../context/CompraContext';
+import { cartContext } from '../../context/CartContext';
+import { compraContext } from '../../context/CompraContext';
 import ListadoCompra from './ListadoCompra';
 
 const Form = () => {
